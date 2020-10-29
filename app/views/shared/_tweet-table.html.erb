@@ -1,0 +1,19 @@
+<div>
+  <% @tweets.each do |tweet| %>
+    <li>
+      <%= link_to "@#{tweet.user.username}", user_path(tweet.user), :class => 'tweet-username' %>
+      <small><%= tweet.created_at %></small><br/>
+      <%= tweet.body %>
+
+      <% tweet.tags.each do |tag| %>
+        <%= link_to "#{tag.name}", tag_path(tag), :class => 'tweet-tag' %>
+      <% end %>
+
+      <% tweet.mentions.each do |mention| %>
+        <%= link_to "#{mention.name}", mention_path(mention), :class => 'tweet-tag' %>
+      <% end %>
+
+      <%= link_to 'X', tweet_path(tweet), method: :delete, :class => 'tweet-delete' if current_user == tweet.user %>
+    </li>
+  <% end %>
+</div>

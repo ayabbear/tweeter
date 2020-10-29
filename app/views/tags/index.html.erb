@@ -1,0 +1,9 @@
+<div class="page-container">
+  <h1>Trends for you</h1>
+    <% @tags.each do |tag| %>
+      <li>
+        <%= link_to "#{tag.name}", tag_path(tag), :class => 'tweet-tag' %>
+      </li>
+    <% end %>
+</div>
+

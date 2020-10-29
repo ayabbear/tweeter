@@ -10,7 +10,7 @@
       <% end %>
 
       <% tweet.mentions.each do |mention| %>
-        <%= link_to "#{mention.name}", mention_path(mention), :class => 'tweet-tag' %>
+        <%= link_to "#{mention.name}", user_path(mention.name.sub('@', '')), :class => 'tweet-tag' %>
       <% end %>
 
       <%= link_to 'X', tweet_path(tweet), method: :delete, :class => 'tweet-delete' if current_user == tweet.user %>

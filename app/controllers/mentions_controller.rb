@@ -4,7 +4,7 @@ class MentionsController < ApplicationController
   end
 
   def show
-    @mention = Mention.find(params[:id])
+    @mention = Mention.find_by_name(params[:id])
     @tweets = @mention.tweets.all
   end
 end

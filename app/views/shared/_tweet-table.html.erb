@@ -1,4 +1,4 @@
-
+<div class="tweets-container">
   <% @tweets.each do |tweet| %>
     <% if current_user.following?(tweet.user) || (current_user.username === tweet.user.username) %>
       <div class="tweet-feed-container">
@@ -19,3 +19,7 @@
       </div>
     <% end %>
   <% end %>
+</div>
+<div class="pagination-container">
+  <%= will_paginate @tweets, :class => 'pagination' %>
+</div>

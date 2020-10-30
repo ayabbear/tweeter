@@ -6,4 +6,9 @@ Rails.application.routes.draw do
   resources :mentions, only: [:index, :show]
   resources :users, only: [:show]
   resources :relationships, only: [:create, :destroy]
+  resources :tweets do
+    member do
+        post :retweet
+    end
+  end
 end

@@ -1,4 +1,25 @@
 <div class="page-container">
   <h1>Notifications</h1>
-  <%= render "shared/tweet-table" %>
+  <div class="tweets-container">
+    <% @tweets.each do |tweet| %>
+      <% tweet.mentions.each do |mention| %>
+        <% if mention.name.sub('@', '') === current_user.username %>
+          <div class="tweet-feed-container">
+            <strong><%= link_to "@#{tweet.user.username}", user_path(tweet.user), :class => 'tweet-username' %></strong>
+            · <small><%= tweet.created_at.strftime("%b %d, %Y %I:%M %p") %></small><br/>
+            <%= tweet.body %>
+
+            <% tweet.tags.each do |tag| %>
+              <%= link_to "#{tag.name}", tag_path(tag), :class => 'tweet-tag' %>
+            <% end %>
+
+            <%= link_to "#{mention.name}", user_path(mention.name.sub('@', '')), :class => 'tweet-tag' %>
+          
+            <%= link_to '↺', retweet_tweet_path(tweet.id), method: :post, :class => 'tweet-delete' %>
+            <%= link_to 'X', tweet_path(tweet), method: :delete, :class => 'tweet-delete' if current_user == tweet.user %>        
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

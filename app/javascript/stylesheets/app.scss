@@ -34,8 +34,25 @@ body {
   color: #808080;
 }
 
+.pagination-container {
+  position: fixed;
+  bottom: 0;
+}
+
+.pagination {
+  background-color: #bebebe;
+  border-radius: 9999px;
+  padding: .25rem .5rem;
+  font-weight: bold;
+}
+
 .page-container {
   padding: 1rem 5rem 1rem 22rem;
+}
+
+.tweets-container {
+  position: relative;
+  overflow: scroll;
 }
 
 .tweet-container {

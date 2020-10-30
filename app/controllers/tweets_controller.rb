@@ -36,6 +36,36 @@ class TweetsController < ApplicationController
     redirect_to tweets_path
   end
 
+  def retweet
+    original_tweet = Tweet.find(params[:id])
+
+    @retweet = Tweet.new(
+      user_id: current_user.id,
+      body: original_tweet.body
+    )
+    @retweet.save
+
+    @tag_array = @retweet.body.scan(/#\w+\b/)
+    unless @tag_array == []
+      @tag_array.each do |tag|
+        @tag = Tag.find_or_initialize_by(name: tag)
+        @tag.save
+        @retweet.tags << @tag
+      end
+    end
+
+    @mention_array = @retweet.body.scan(/@\w+\b/)
+    unless @mention_array == []
+      @mention_array.each do |mention|
+        @mention = Mention.find_or_initialize_by(name: mention)
+        @mention.save
+        @retweet.mentions << @mention
+      end
+    end
+
+    redirect_to tweets_path
+  end
+  
   private
     def tweet_params
       params.require(:tweet).permit(:body)

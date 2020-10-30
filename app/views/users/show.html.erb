@@ -39,8 +39,8 @@
   <h1>Tweets</h1>
   <% @user.tweets.each do |tweet| %>
     <li>
-      <span class="tweet-username">@<%= @user.username %></span>
-      <small><%= tweet.created_at %></small>
+      <strong><span class="tweet-username">@<%= @user.username %></span></strong>
+      · <small><%= tweet.created_at.strftime("%b %d, %Y %I:%M %p") %></small>
       <%= tweet.body %>
       
       <% tweet.tags.each do |tag| %>

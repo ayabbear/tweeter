@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
 
   def index
     @tweet = Tweet.new
-    @tweets = Tweet.paginate(:page => params[:page], :per_page=>12).order("created_at DESC")
+    @tweets = Tweet.where(user_id: current_user.followees.select(:id)).or(Tweet.where(user_id: current_user.id)).paginate(:page => params[:page], :per_page=>6).order("created_at DESC")
   end
 
   def create

@@ -40,7 +40,7 @@
   <% @user.tweets.each do |tweet| %>
     <div class="tweet-feed-container">
       <strong><span class="tweet-username">@<%= @user.username %></span></strong>
-      · <small><%= tweet.created_at.strftime("%b %d, %Y %I:%M %p") %></small>
+      · <small><%= tweet.created_at.strftime("%b %d, %Y %I:%M %p") %></small><br/>
       <%= tweet.body %>
       
       <% tweet.tags.each do |tag| %>
@@ -48,7 +48,7 @@
       <% end %>
 
       <% tweet.mentions.each do |mention| %>
-        <%= link_to "#{mention.name}", user_path(mention), :class => 'tweet-tag' %>
+        <%= link_to "#{mention.name}", user_path(mention.name.sub('@', '')), :class => 'tweet-tag' %>
       <% end %>
 
       <%= link_to 'X', tweet_path(tweet), method: :delete, :class => 'tweet-delete' if current_user == @user %>

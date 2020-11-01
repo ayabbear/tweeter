@@ -12,10 +12,6 @@
   <body>
     <% if user_signed_in? %>
       <%= render 'shared/navbar' %>
-    <% else %>
-      <div class="login-container">
-        <%= link_to 'Sign up', new_user_registration_path %> | <%= link_to 'Sign in', new_user_session_path %>
-      </div>
     <% end %>
     <%= yield %>
   </body>

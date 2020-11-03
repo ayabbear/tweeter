@@ -1,0 +1,8 @@
+<div class="page-container">
+  <h1>Users</h1>
+  <% @users.each do |user| %>
+      <li>
+        <%= link_to "@#{user.username}", user_path(user), :class => 'tweet-tag' %>
+      </li>
+  <% end %>
+</div>
